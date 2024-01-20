@@ -1,19 +1,20 @@
 const characterListContainer = document.querySelector("#character-list");
 
+const characters = [
+	{ name: "Haseo", hp: 150 },
+	{ name: "Atoli", hp: 110 },
+	{ name: "Kuhn", hp: 140 },
+	// Add more characters here
+];
+
 const showCharacters = function () {
-	const characters = [
-		{ name: "Haseo", hp: 150 },
-		{ name: "Atoli", hp: 110 },
-		{ name: "Kuhn", hp: 140 },
-		// Add more characters here
-	];
 	const markup = `
         ${characters
-					.map((char) => {
+					.map((char, i) => {
 						return `
-        <div class="bg-gray-200 p-4 rounded-lg">
-            <p class="text-center">${char.name}</p>
-            <p class="text-center">HP: ${char.hp}</p>
+        <div class="character-item bg-gray-200 p-4 rounded-lg" data-char-index="${i}">
+            <span class="text-center">${char.name}</span>
+            <span class="text-center">HP: ${char.hp}</span>
         </div>
         `;
 					})
@@ -24,3 +25,15 @@ const showCharacters = function () {
 };
 
 showCharacters();
+
+// Functions
+const getCharacterName = function (e) {
+	if (e.target.classList.contains("character-item")) {
+		const characterIndex = e.target.dataset.charIndex;
+		const targetedCharacter = characters[characterIndex];
+		console.log(`Character selected: ${targetedCharacter.name}`);
+	}
+};
+
+// Events
+characterListContainer.addEventListener("click", getCharacterName);

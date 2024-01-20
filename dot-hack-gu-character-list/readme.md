@@ -6,3 +6,4 @@ This exercise is designed to help you practice DOM manipulation, looping through
 
 - Use JavaScript to dynamically generate a character list from an array of objects.
 - Practice looping through an array and manipulating the DOM.
+- Practice event delegation
