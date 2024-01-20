@@ -4,7 +4,5 @@ This exercise is designed to help you practice DOM manipulation, looping through
 
 ## Exercise Objectives
 
-- Create an HTML page structure.
 - Use JavaScript to dynamically generate a character list from an array of objects.
-- Apply Tailwind CSS for styling the UI.
 - Practice looping through an array and manipulating the DOM.
