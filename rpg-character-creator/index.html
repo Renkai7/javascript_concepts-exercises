@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RPG Character Creator</title>
+    <!-- Add the Tailwind CSS CDN link -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <script defer src="script.js"></script>
+
+</head>
+
+<body class="bg-gray-600">
+    <div class="container mx-auto p-6">
+        <h1 class="text-2xl font-semibold mb-4">RPG Character Creator</h1>
+        <div id="character-container" class="bg-white rounded-lg p-4 mb-4">
+            <!-- Character display will go here -->
+        </div>
+        <div id="options" class="bg-white rounded-lg p-4">
+            <div class="mb-4">
+                <label for="name-input" class="text-lg font-semibold">Character Name:</label>
+                <input type="text" id="name-input" class="border rounded-md p-2 w-full" placeholder="Enter name">
+            </div>
+            <div class="mb-4 rpg-stats">
+                <label class="text-lg font-semibold">RPG Stats:</label>
+                <!-- <div class="flex items-center">
+                    <button id="health-minus" class="bg-red-500 text-white px-2 py-1 rounded-full mr-2">-</button>
+                    <span id="health" class="text-lg font-semibold">Health: 100</span>
+                    <button id="health-plus" class="bg-green-500 text-white px-2 py-1 rounded-full ml-2">+</button>
+                </div> -->
+                <!-- Repeat this structure for other stats (attack, defense, etc.) -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
