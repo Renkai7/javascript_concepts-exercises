@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+    </style>
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+    <div class="container mx-auto mt-5">
+        <h1 class="text-3xl font-semibold mb-5">Issue Tracker</h1>
+
+        <!-- Issue List -->
+        <div class="mb-5">
+            <div class="grid grid-cols-3 gap-4 issue-list">
+                <!-- Issue Row -->
+                <div class="bg-gray-700 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">Issue 1</h2>
+                    <p class="text-gray-400 mb-2">This is the description for Issue 1.</p>
+                    <div class="flex">
+                        <button class="px-2 py-1 mr-2 bg-blue-500 hover:bg-blue-600 text-white rounded">Edit</button>
+                        <button class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white rounded">Delete</button>
+                    </div>
+                </div>
+                <!-- Add more issue rows here -->
+                <div class="bg-gray-700 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">Issue 2</h2>
+                    <p class="text-gray-400 mb-2">This is the description for Issue 2.</p>
+                    <div class="flex">
+                        <button class="px-2 py-1 mr-2 bg-blue-500 hover:bg-blue-600 text-white rounded">Edit</button>
+                        <button class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white rounded">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create New Issue Form -->
+        <div class="bg-gray-700 p-4 rounded-lg">
+            <h2 class="text-lg font-semibold mb-2">Create New Issue</h2>
+            <form class="upload">
+                <div class="mb-4">
+                    <label for="issueTitle" class="block text-gray-400">Issue Title</label>
+                    <input value="New issue" type="text" id="issueTitle" name="issueTitle"
+                        class="w-full px-3 py-2 bg-gray-800 text-gray-200 rounded focus:outline-none focus:ring focus:border-blue-300"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <label for="issueDescription" class="block text-gray-400">Issue Description</label>
+                    <textarea id="issueDescription" name="issueDescription" rows="4"
+                        class="w-full px-3 py-2 bg-gray-800 text-gray-200 rounded focus:outline-none focus:ring focus:border-blue-300"
+                        required>This is a new issue</textarea>
+                </div>
+                <button type="submit" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded">Add</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
