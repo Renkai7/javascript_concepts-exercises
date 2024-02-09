@@ -1,5 +1,5 @@
 // Model
-const issues = [
+let issues = [
 	{
 		id: 1,
 		title: "Issue 1",
@@ -31,7 +31,7 @@ const generateUniqueID = function (issues) {
 
 const createIssueObject = function (data) {
 	return {
-		id: generateUniqueID(issues),
+		id: data.id !== undefined ? data.id : generateUniqueID(issues),
 		title: data.issueTitle,
 		description: data.issueDescription,
 	};
@@ -48,8 +48,16 @@ const getIssueById = function (issueId) {
 	return issueSelected;
 };
 
-// TODO: UPDATE ISSUE IN LIST BASED ON ISSUE ID
-const editIssue = function (issueId) {};
+const editIssue = function (updatedIssue) {
+	const issueIndex = issues.findIndex((issue) => issue.id === updatedIssue.id);
+	const data = createIssueObject(updatedIssue);
+	issues[issueIndex] = data;
+};
+
+const removeIssue = function (issueId) {
+	issues = issues.filter((issue) => issue.id !== issueId);
+	console.log(issues);
+};
 
 // Controller
 const controlIssues = function () {
@@ -69,9 +77,13 @@ const controlPopulateEditIssue = function (issueId) {
 	editIssueView.render(issue);
 };
 
-// TODO: CREATE CONTROLLER TO UPDATE ISSUE BY ID
 const controlUpdateIssue = function (updatedIssue) {
 	editIssue(updatedIssue);
+	issueView.render(issues);
+};
+
+const controlDeleteIssue = function (issueId) {
+	removeIssue(issueId);
 	issueView.render(issues);
 };
 
@@ -112,6 +124,17 @@ class IssuesView extends View {
 		});
 	}
 
+	addHandlerDeleteIssue(handler) {
+		this._parentElement.addEventListener("click", function (e) {
+			e.preventDefault();
+			const btn = e.target.closest(".btn--delete-issue");
+			if (!btn) return;
+			const { id } = btn.dataset;
+
+			handler(+id);
+		});
+	}
+
 	_generateMarkup() {
 		return `
 			${this._data.map(this._generateMarkupIssue).join("")}
@@ -125,7 +148,7 @@ class IssuesView extends View {
 			<p class="text-gray-400 mb-2">${issue.description}</p>
 			<div class="flex">
 				<button class="px-2 py-1 mr-2 bg-blue-500 hover:bg-blue-600 text-white rounded btn--edit-issue" data-id="${issue.id}">Edit</button>
-				<button class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white rounded">Delete</button>
+				<button class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white rounded btn--delete-issue" data-id="${issue.id}">Delete</button>
 			</div>
 		</div>
 	`;
@@ -149,6 +172,7 @@ class AddIssueView extends View {
 
 // Edit Issue form
 class EditIssueView extends View {
+	_data;
 	_parentElement = document.querySelector(".edit");
 
 	render(issue) {
@@ -165,6 +189,13 @@ class EditIssueView extends View {
 			e.preventDefault();
 			const dataArr = [...new FormData(this)];
 			const data = Object.fromEntries(dataArr);
+
+			const btn = document.querySelector(".btn--update-issue");
+			if (!btn) return;
+			const { id } = btn.dataset;
+
+			data.id = +id;
+
 			console.log(data);
 			handler(data);
 		});
@@ -186,7 +217,7 @@ class EditIssueView extends View {
                         class="w-full px-3 py-2 bg-gray-800 text-gray-200 rounded focus:outline-none focus:ring focus:border-blue-300"
                         required>${this._data.description}</textarea>
                 </div>
-				<button type="submit" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded">Update
+				<button type="submit" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded btn--update-issue" data-id="${this._data.id}">Update
                     Issue</button>
 		`;
 	}
@@ -200,6 +231,7 @@ const editIssueView = new EditIssueView();
 const init = function () {
 	issueView.addHandlerRender(controlIssues);
 	issueView.addHandlerGetIssueId(controlPopulateEditIssue);
+	issueView.addHandlerDeleteIssue(controlDeleteIssue);
 	addIssueView.addHandlerAddIssue(controlAddIssue);
 	editIssueView.addHandlerEditIssue(controlUpdateIssue);
 };
